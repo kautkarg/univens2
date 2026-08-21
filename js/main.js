@@ -195,6 +195,104 @@
     revealEls.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
+  /* ---------- Scroll-linked sentence reveal (intro) ---------- */
+  var introReveal = d.querySelector('[data-reveal="scroll-fade"]');
+  if (introReveal) {
+    var introWrap = introReveal.closest('.intro-wrap');
+    var kicker = introReveal.querySelector('.intro-kicker');
+    var wordsEl = introReveal.querySelector('.intro-words');
+    var lead = introReveal.querySelector('.intro-lead');
+    var steps = [];
+    if (kicker) steps.push(kicker);
+    if (wordsEl) {
+      var sentenceParts = wordsEl.textContent.trim().split(/(?<=\.)\s+/);
+      wordsEl.textContent = '';
+      sentenceParts.forEach(function (s) {
+        var sp = d.createElement('span');
+        sp.className = 'sentence';
+        sp.textContent = s;
+        wordsEl.appendChild(sp);
+        wordsEl.appendChild(d.createTextNode(' '));
+      });
+      wordsEl.querySelectorAll('.sentence').forEach(function (s) { steps.push(s); });
+    }
+    if (lead) steps.push(lead);
+
+    function easeInOutQuart(t) {
+      return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+    }
+
+    if (reducedMotion || !steps.length) {
+      steps.forEach(function (el) { el.style.setProperty('--char-reveal', '100%'); });
+    } else {
+      var totalChars = steps.reduce(function (sum, el) { return sum + el.textContent.length; }, 0);
+      function updateFade() {
+        var rect = introWrap ? introWrap.getBoundingClientRect() : introReveal.getBoundingClientRect();
+        var vh = window.innerHeight || d.documentElement.clientHeight;
+        var pinned = rect.height - vh;
+        var p = pinned > 0 ? Math.min(1, Math.max(0, -rect.top / pinned)) : 1;
+        var active = easeInOutQuart(p) * totalChars;
+        var consumed = 0;
+        steps.forEach(function (el) {
+          var len = el.textContent.length;
+          var raw = Math.min(1, Math.max(0, (active - consumed) / len));
+          consumed += len;
+          el.style.setProperty('--char-reveal', (raw * 100).toFixed(2) + '%');
+        });
+      }
+      var fadeTick = false;
+      function onScrollFade() {
+        if (fadeTick) return;
+        fadeTick = true;
+        requestAnimationFrame(function () {
+          updateFade();
+          fadeTick = false;
+        });
+      }
+      window.addEventListener('scroll', onScrollFade, { passive: true });
+      window.addEventListener('resize', onScrollFade, { passive: true });
+      updateFade();
+    }
+  }
+
+  /* ---------- Redesigned Case Studies Interactive Accordion ---------- */
+  d.querySelectorAll('.case-card-item').forEach(function(card) {
+    card.addEventListener('click', function() {
+      d.querySelectorAll('.case-card-item').forEach(function(c) {
+        if (c !== card) c.classList.remove('is-expanded');
+      });
+      card.classList.toggle('is-expanded');
+    });
+  });
+
+  /* ---------- Scroll-trapping fix ---------- */
+  function toggleInternalScroll() {
+    d.querySelectorAll('.section .container').forEach(function(container) {
+      container.style.overflowY = container.scrollHeight > container.clientHeight ? 'auto' : 'hidden';
+    });
+  }
+  window.addEventListener('resize', toggleInternalScroll);
+  toggleInternalScroll();
+
+  /* ---------- GSAP Animations ---------- */
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray(".reveal").forEach(function (el) {
+    gsap.fromTo(el, 
+      { opacity: 0, y: 30 }, 
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.5, 
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+  });
+
   /* ---------- Scrollspy (active nav link) ---------- */
   var navLinks = d.querySelectorAll('#navLinks > a');
   var sections = [];

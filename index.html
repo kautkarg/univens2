@@ -12,7 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
-  <noscript><style>.reveal{opacity:1;transform:none}.nav-menu{display:none!important}</style></noscript>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <noscript><style>.reveal{opacity:1;transform:none}.intro-kicker,.intro-lead,.sentence{--char-reveal:100%!important}.nav-menu{display:none!important}</style></noscript>
 </head>
 <body>
 
@@ -142,44 +144,61 @@
       </div>
     </section>
 
-    <!-- ============ SECTION 02 · CLIENT MARQUEE ============ -->
+    <!-- ============ SECTION 02 · CLIENTS ============ -->
     <section class="clients" id="clients" aria-label="Clients">
-      <div class="clients-scroller" aria-hidden="true">
-        <div class="clients-track">
-          <span>Spruce Lifeskills</span>
-          <i class="clients-dot">•</i>
-          <span>Zesh Agency</span>
-          <i class="clients-dot">•</i>
-          <span>Spruce Lifeskills</span>
-          <i class="clients-dot">•</i>
-          <span>Zesh Agency</span>
-          <i class="clients-dot">•</i>
-        </div>
-      </div>
-      <p class="clients-note">Trusted through ongoing engagements.</p>
-    </section>
-
-    <!-- ============ SECTION 03 · INTRODUCTION ============ -->
-    <section class="section intro" id="about">
-      <div class="container">
-        <div class="grid-lead">
-          <h2 class="section-title reveal">Ambition rarely stops at the idea.</h2>
-          <div class="grid-lead-main">
-            <div class="intro-lines">
-              <p class="intro-line reveal">A new product needs technology.</p>
-              <p class="intro-line reveal">A growing business needs systems.</p>
-              <p class="intro-line reveal">A new market needs execution.</p>
-              <p class="intro-line reveal">A transformation needs people who can make it happen.</p>
-              <p class="intro-line reveal">The requirement changes with the objective.</p>
+      <div class="container clients-inner">
+        <p class="clients-lead">Trusted through ongoing engagements</p>
+        <ul class="clients-row">
+          <li class="client-slot" style="--i:0">
+            <div class="client-stack">
+              <span class="client-logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20v-7"/><path d="M12 13c0-3.4-2.6-5.5-6-5.5 0 3.4 2.6 5.5 6 5.5z"/><path d="M12 13c0-3.4 2.6-5.5 6-5.5 0 3.4-2.6 5.5-6 5.5z"/></svg><span>Spruce Lifeskills</span></span>
+              <span class="client-logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span>Fireblaze</span></span>
+              <span class="client-logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 3v5h-5"/></svg><span>Cycle Sync</span></span>
             </div>
-            <p class="intro-strong reveal">Univens brings together the expertise, technology, and execution required to move that objective forward.</p>
-            <p class="intro-close reveal">We connect businesses with the right capabilities to turn strategic intent into working reality.</p>
-          </div>
-        </div>
+          </li>
+          <li class="client-slot" style="--i:1">
+            <div class="client-stack">
+              <span class="client-logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg><span>Zesh Agency</span></span>
+              <span class="client-logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/><circle cx="12" cy="5" r="2.5"/><circle cx="12" cy="19" r="2.5"/><path d="M7.2 10.8 9.8 6.2"/><path d="M16.8 10.8 14.2 6.2"/><path d="M7.2 13.2 9.8 17.8"/><path d="M16.8 13.2 14.2 17.8"/></svg><span>Uniconnect</span></span>
+              <span class="client-logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 4 5.5v13c3-1 6-1 8 .5 2-1.5 5-1.5 8-.5v-13c-3-1-6-.5-8 .5z"/><path d="M12 6.5v12.5"/></svg><span>Bookstaken</span></span>
+            </div>
+          </li>
+          <li class="client-slot" style="--i:2">
+            <div class="client-stack">
+              <span class="client-logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 9.5 12 4.5l9.5 5L12 14.5z"/><path d="M6.5 11.5v3.5c0 1.6 2.5 3 5.5 3s5.5-1.4 5.5-3v-3.5"/><path d="M21.5 9.5v5"/></svg><span>Spruce Academia</span></span>
+              <span class="client-logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 3v5h-5"/></svg><span>Cycle Sync</span></span>
+              <span class="client-logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/><circle cx="12" cy="5" r="2.5"/><circle cx="12" cy="19" r="2.5"/><path d="M7.2 10.8 9.8 6.2"/><path d="M16.8 10.8 14.2 6.2"/><path d="M7.2 13.2 9.8 17.8"/><path d="M16.8 13.2 14.2 17.8"/></svg><span>Uniconnect</span></span>
+            </div>
+          </li>
+          <li class="client-slot" style="--i:3">
+            <div class="client-stack">
+              <span class="client-logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 4 5.5v13c3-1 6-1 8 .5 2-1.5 5-1.5 8-.5v-13c-3-1-6-.5-8 .5z"/><path d="M12 6.5v12.5"/></svg><span>Bookstaken</span></span>
+              <span class="client-logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg><span>Zesh Agency</span></span>
+              <span class="client-logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20v-7"/><path d="M12 13c0-3.4-2.6-5.5-6-5.5 0 3.4 2.6 5.5 6 5.5z"/><path d="M12 13c0-3.4 2.6-5.5 6-5.5 0 3.4-2.6 5.5-6 5.5z"/></svg><span>Spruce Lifeskills</span></span>
+            </div>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <!-- ============ SECTION 04 · OFFERINGS ============ -->
+    <!-- ============ SECTION 03 · INTRODUCTION / COMPANY INTRO ============ -->
+    <div class="intro-wrap">
+      <section class="section intro" id="about">
+        <div class="container">
+<div class="intro-cols" data-reveal="scroll-fade">
+          <h2 class="intro-title">
+            <span class="intro-kicker">Ambition rarely stops at the idea.</span>
+            <span class="intro-words">A new product needs technology. A growing business needs systems. A new market needs execution. A transformation needs people who can make it happen. The requirement changes with the objective.</span>
+          </h2>
+          <p class="intro-lead">
+            Univens brings together the expertise, technology, and execution required to move that objective forward — connecting businesses with the right capabilities to turn strategic intent into working reality.
+          </p>
+        </div>
+        </div>
+    </section>
+  </div>
+  
+  <!-- ============ SECTION 04 · OFFERINGS ============ -->
     <section class="section offerings" id="solutions">
       <div class="container">
         <h2 class="section-title reveal">Whatever the objective requires, we bring together the capabilities to execute it.</h2>
@@ -337,92 +356,69 @@
     </section>
 
     <!-- ============ SECTION 07 · CASE STUDIES ============ -->
+    <!-- ============ SECTION 07 · CASE STUDIES ============ -->
     <section class="section work" id="work">
-      <div class="container">
+      <div class="container work-layout">
         <h2 class="section-title reveal">Capabilities are easier to claim than evidence. We work where the objective demands it.</h2>
-
-        <!-- CASE STUDY: SPRUCE -->
-        <article class="case-card reveal">
-          <header class="case-head">
-            <div>
-              <h3>Spruce Lifeskills</h3>
-              <p class="case-loc">Nagpur · <a href="http://www.sprucelifeskills.com" target="_blank" rel="noopener">www.sprucelifeskills.com</a></p>
+        
+        <div class="case-grid-interactive">
+          <!-- CARD 1: SPRUCE -->
+          <div class="case-card-item is-expanded" data-case="spruce">
+            <div class="case-card-header">
+              <div>
+                <h3>Spruce Lifeskills</h3>
+                <p class="case-loc">Nagpur · <a href="http://www.sprucelifeskills.com" target="_blank" rel="noopener">www.sprucelifeskills.com</a></p>
+              </div>
+              <span class="case-status">Ongoing</span>
             </div>
-            <span class="case-status">Ongoing</span>
-          </header>
-
-          <dl class="case-meta-list">
-            <div class="case-meta-item">
-              <dt>Engagement Type</dt>
-              <dd>MoM Engagement + Revenue Sharing</dd>
-            </div>
-            <div class="case-meta-item">
-              <dt>Engagement Status</dt>
-              <dd>Ongoing</dd>
-            </div>
-          </dl>
-
-          <div class="case-body">
-            <div class="case-copy">
-              <p>Spruce Lifeskills was operating through decentralized and largely manual processes across learning delivery, student management, administration, and institutional relationships.</p>
-              <p class="case-role"><strong>Univens's role.</strong> Univens works with Spruce as a long-term technology and strategic execution partner, helping centralise its operations and strengthen the infrastructure supporting its growth.</p>
-            </div>
-            <div>
-              <p class="case-label">Work delivered / ongoing</p>
-              <ul class="case-list">
-                <li>Learning Management System</li>
-                <li>CRM integration</li>
-                <li>Centralised operational management</li>
-                <li>IT infrastructure</li>
-                <li>HR and recruitment support</li>
-                <li>Institutional partnership management</li>
-              </ul>
+            <div class="case-card-body">
+              <div class="case-copy">
+                <p>Spruce Lifeskills was operating through decentralized and largely manual processes across learning delivery, student management, administration, and institutional relationships.</p>
+                <p class="case-role"><strong>Univens's role.</strong> Univens works with Spruce as a long-term technology and strategic execution partner, helping centralise its operations and strengthen the infrastructure supporting its growth.</p>
+              </div>
+              <div>
+                <p class="case-label">Work delivered / ongoing</p>
+                <ul class="case-list">
+                  <li>Learning Management System</li>
+                  <li>CRM integration</li>
+                  <li>Centralised operational management</li>
+                  <li>IT infrastructure</li>
+                  <li>HR and recruitment support</li>
+                  <li>Institutional partnership management</li>
+                </ul>
+              </div>
+              <p class="case-close">From technology infrastructure to recruitment and partnerships, the engagement extends beyond a single service because the business objective requires more than a single service.</p>
             </div>
           </div>
 
-          <p class="case-close">From technology infrastructure to recruitment and partnerships, the engagement extends beyond a single service because the business objective requires more than a single service.</p>
-        </article>
-
-        <!-- CASE STUDY: ZESH -->
-        <article class="case-card reveal">
-          <header class="case-head">
-            <div>
-              <h3>Zesh Agency</h3>
-              <p class="case-loc">Pune · <a href="http://www.zeshagency.com" target="_blank" rel="noopener">www.zeshagency.com</a></p>
+          <!-- CARD 2: ZESH -->
+          <div class="case-card-item" data-case="zesh">
+            <div class="case-card-header">
+              <div>
+                <h3>Zesh Agency</h3>
+                <p class="case-loc">Pune · <a href="http://www.zeshagency.com" target="_blank" rel="noopener">www.zeshagency.com</a></p>
+              </div>
+              <span class="case-status">Ongoing</span>
             </div>
-            <span class="case-status">Ongoing</span>
-          </header>
-
-          <dl class="case-meta-list">
-            <div class="case-meta-item">
-              <dt>Engagement Type</dt>
-              <dd>MoM Engagement</dd>
-            </div>
-            <div class="case-meta-item">
-              <dt>Technology</dt>
-              <dd>WordPress · Next.js · Headless CMS</dd>
-            </div>
-          </dl>
-
-          <div class="case-body">
-            <div class="case-copy">
-              <p>Zesh Agency works across creative, advertising, and digital marketing. Its client engagements often require dependable technical execution alongside strategy and creative work.</p>
-              <p class="case-role"><strong>Univens's role.</strong> Univens works as Zesh Agency's IT and technical execution partner, supporting the delivery of technology requirements for its clients.</p>
-            </div>
-            <div>
-              <p class="case-label">Work delivered / ongoing</p>
-              <ul class="case-list">
-                <li>Landing pages</li>
-                <li>SEO-focused website development</li>
-                <li>E-commerce platforms</li>
-                <li>Technical consulting</li>
-                <li>Ongoing web development</li>
-              </ul>
+            <div class="case-card-body">
+              <div class="case-copy">
+                <p>Zesh Agency works across creative, advertising, and digital marketing. Its client engagements often require dependable technical execution alongside strategy and creative work.</p>
+                <p class="case-role"><strong>Univens's role.</strong> Univens works as Zesh Agency's IT and technical execution partner, supporting the delivery of technology requirements for its clients.</p>
+              </div>
+              <div>
+                <p class="case-label">Work delivered / ongoing</p>
+                <ul class="case-list">
+                  <li>Landing pages</li>
+                  <li>SEO-focused website development</li>
+                  <li>E-commerce platforms</li>
+                  <li>Technical consulting</li>
+                  <li>Ongoing web development</li>
+                </ul>
+              </div>
+              <p class="case-close">Zesh focuses on its client relationships, strategy, and creative capabilities. Univens provides the technical execution required to deliver them.</p>
             </div>
           </div>
-
-          <p class="case-close">Zesh focuses on its client relationships, strategy, and creative capabilities. Univens provides the technical execution required to deliver them.</p>
-        </article>
+        </div>
       </div>
     </section>
 
