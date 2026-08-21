@@ -132,7 +132,7 @@
   }
 
   /* ---------- Header scroll state + adaptive theme ---------- */
-  var themeSections = d.querySelectorAll('.hero, .clients, .cta, .footer');
+  var themeSections = d.querySelectorAll('.hero, .cta, .footer');
   var heroSec = d.querySelector('.hero');
   function onScrollHeader() {
     if (!header) return;
@@ -179,9 +179,27 @@
     });
   });
 
-  /* ---------- Reveal on scroll ---------- */
+  /* ---------- Reveal on scroll (GSAP primary, IntersectionObserver fallback) ---------- */
   var revealEls = d.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
+  if (window.gsap && window.ScrollTrigger && !reducedMotion) {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray('.reveal').forEach(function (el) {
+      gsap.fromTo(el,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
+          }
+        }
+      );
+    });
+  } else if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -255,13 +273,19 @@
     }
   }
 
-  /* ---------- Redesigned Case Studies Interactive Accordion ---------- */
-  d.querySelectorAll('.case-card-item').forEach(function(card) {
-    card.addEventListener('click', function() {
-      d.querySelectorAll('.case-card-item').forEach(function(c) {
-        if (c !== card) c.classList.remove('is-expanded');
+  /* ---------- Case Studies Accordion (Lumena style) ---------- */
+  d.querySelectorAll('.work-item-header').forEach(function(header) {
+    header.addEventListener('click', function() {
+      var item = header.closest('.work-item');
+      var isOpen = item.classList.contains('open');
+      
+      // Close all other items
+      d.querySelectorAll('.work-item').forEach(function(i) {
+        if (i !== item) i.classList.remove('open');
       });
-      card.classList.toggle('is-expanded');
+      
+      // Toggle current item
+      item.classList.toggle('open');
     });
   });
 
@@ -273,25 +297,6 @@
   }
   window.addEventListener('resize', toggleInternalScroll);
   toggleInternalScroll();
-
-  /* ---------- GSAP Animations ---------- */
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.utils.toArray(".reveal").forEach(function (el) {
-    gsap.fromTo(el, 
-      { opacity: 0, y: 30 }, 
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.5, 
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
-  });
 
   /* ---------- Scrollspy (active nav link) ---------- */
   var navLinks = d.querySelectorAll('#navLinks > a');
@@ -316,4 +321,27 @@
     window.addEventListener('scroll', spy, { passive: true });
     spy();
   }
+})();
+
+/* ---------- Expertise slider navigation ---------- */
+(function () {
+  var track = document.querySelector('.expertise-track');
+  var prev = document.querySelector('.expertise-nav-prev');
+  var next = document.querySelector('.expertise-nav-next');
+  if (!track || !prev || !next) return;
+
+  function update() {
+    prev.disabled = track.scrollLeft <= 0;
+    next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+  }
+
+  prev.addEventListener('click', function () {
+    track.scrollBy({ left: -track.clientWidth * 0.75, behavior: 'smooth' });
+  });
+  next.addEventListener('click', function () {
+    track.scrollBy({ left: track.clientWidth * 0.75, behavior: 'smooth' });
+  });
+
+  track.addEventListener('scroll', update, { passive: true });
+  update();
 })();
